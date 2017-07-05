@@ -5,9 +5,8 @@ const dbUrl = "mongodb://localhost:27017/robos";
 
 function findDoc(db, params, callback) {
   let collection = db.collection("data");
-  console.log(params);
-  collection.find(params).toArray(function (err, data) {
-    callback(data);
+  collection.find(params).then(function (data) {
+    console.log(data);
   });
 }
 
@@ -42,4 +41,5 @@ router.get("/country/:country",function (req,res) {
 router.get("/skill/:skill",function (req,res) {
   render(res,"index", {"skills": {$elemMatch: {$eq:req.params.skill}}});
 });
+
 module.exports = router;
